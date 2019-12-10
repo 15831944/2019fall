@@ -1,0 +1,1283 @@
+\documentclass[]{report}
+\usepackage[pdftex]{graphicx}
+%\usepackage{grffile}
+\usepackage{amsmath}
+%usepackage[ruled,linesnumbered]{algorithm2e}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+% Title Page
+\title{SCUT 2019 Fall Computer Graphic Review}
+\author{qixuan}
+
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+	Chapter 1: Computer Graphics hot topics\\
+	Chapter 2: Raster Graphics\\
+	Chapter 3: OpenGL basic convections, Coordinate system, Geometric Primitives\\
+	Chapter 4: 2D Modeling Transformations, Matrix Representation, Homogeneous Coordinates\\
+	Chapter 5: Rendering 3D Scenes Pipeline, 3D Scene Representation, Euclidean Spaces\\
+	Chapter 6: Triangle Rasterlization, Edge Equations\\
+	Chapter 7: Cohen-Sutherland Line Clipping, Cyrus-Beck algorithm\\
+	Chapter 8: Basics of Color, Color Spaces\\
+	Chapter 9: Light Source, Ambient Light, Surface Reflection, Phong lighting model\\
+	Chapter 10: Global Illumination, Algorithm of ray tracing\\
+	Chapter 11: Three shading models, Morphing
+\end{abstract}
+
+\section*{Chapter 1: CG hot topics}
+\textbf{Geometric modeling}
+
+Methods and algorithms for the mathematical description of shapes(3D modeling, Clothing simulation, Feather, Mesh Editing and Deformation)\\
+\textbf{Rendering}
+
+Photo-realistic rendering(Global illumination, BRDF)\\
+\textbf{Image processing}
+
+Color conversion, transfer, analogy, Deblurring, Image/Video resizing, Video Stablization...\\
+\textbf{Computer animation}
+
+Motion capture, Motion editing\\
+\textbf{GPU acceleration}
+
+GPU(Graphic Processing Unit): reducing data exchange with.
+
+CUDA(Compute Unified Device Architecture): a parallel
+computing platform and programming model invented by
+NVIDIA. It enables dramatic increases in computing
+performance by harnessing the power of the graphics
+processing unit (GPU)\\
+\textbf{Virtual reality}
+
+
+\section*{Chapter 2: Raster Graphics}
+\textbf{CRTs(Cathode Ray Tubes)} device using raster display\\
+\textbf{Raster displays(early 70s)}
+
+Raster: A rectangular array of points or dots
+
+Pixel: One dot or picture element of the raster
+
+Scan line: A row of pixels\\
+\textbf{Raster Graphics}
+
+like TV, scan all pixels in regular pattern
+
+use \textbf{frame buffer} to eliminate \textbf{sync problems}\\
+
+
+\section*{Chapter 3: OpenGL Basic convections}
+\textbf{Functions in OpenGL start with \textbf{gl}}
+
+Most functions just \textbf{gl}(glColor())
+
+Functions start with \textbf{glu} are \textbf{utility functions}(gluLookAt())
+
+Functions start with \textbf{glx} are for interfacing with the X Windows system(in gfx.c)\\
+\textbf{Constants: GL\_2D, GL\_RGB, ...}
+\\
+\textbf{Data types: GLbyte, GLfloat, ...}
+\\
+\textbf{Function names indicate argument type and number}
+
+Functions ending with \textbf{f} take \textbf{floats}
+
+Functions ending with \textbf{i} take \textbf{ints}
+
+Functions ending with \textbf{b} take \textbf{bytes}
+
+Functions ending with \textbf{ub} take \textbf{unsigned bytes}
+
+Functions ending with \textbf{v} take \textbf{an array}\\
+\textbf{Examples}
+
+glColor\textbf{3f}() takes 3 floats
+
+glColor\textbf{4fv}() takes an array of 4 floats\\
+\textbf{Variables written in CAPITAL letters}
+
+eg. GLUT\_SINGLE, GLUT\_RGB
+
+usually constants
+
+use the \textbf{bitwise or} command $(x|y)$ to combine constants\\
+\textbf{OpenGL operations as an infinite loop}
+
+Put things in the scene(points, colored lines, textured polys)
+
+Describe the camera(location, orientation, field of view)
+
+Listen for keyboard/mouse events
+
+Render | draw the scene\\
+\textbf{Rendering}
+
+Typically execution of OpenGL commands
+
+Converting geometric/mathematical object descriptions into frame buffer values\\
+\textbf{OpenGL can render}
+
+Geometric primitives(Lines, Points, Polygons, etc...)
+
+Bitmaps and Images(Images and Geometry linked through texture mapping(Graphics Pipeline))
+
+
+\section*{Chapter 3: Coordinate System}
+\textbf{the world, the local, the camera coordinate(OpenGL)}
+\\
+\textbf{OpenGL coordinate system}
+
+right-handed(cartesian coordinate system, orthogonal)
+
+The camera defaults to look down negative z-axis\\
+\textbf{transformation matrix}
+
+We store the transformation matrix instead of the final desired matrix.
+
+matrix multiplication
+
+We need Transformation Matrix to transform the vertex from the real world to the computer window
+
+This important transformation matrix is stored as the \textbf{MODELVIEW} matrix
+
+Note OpenGL preserves a similar matrix to describe the \textbf{camera type} and this is called the \textbf{PROJECTION\_MATRIX}\\
+\textbf{Geometric Primitives}
+
+\textbf{All geometric primitives are specified by vertices}
+
+\textbf{glBegin(mode) and glEnd() delimit an object mode can be one of the following}
+
+GL\_POINTS
+
+GL\_LINES
+
+GL\_POLYGON
+
+GL\_LINE\_STRIP
+
+GL\_TRIANGLE\_STRIP
+
+GL\_TRIANGLES
+
+GL\_QUADS
+
+GL\_LINE\_LOOP
+
+GL\_QUAD\_STRIP
+
+GL\_TRIANGLE\_FAN
+
+(eg.
+
+Points:
+
+glBegin(GL\_POINTS);
+
+glVertex2i(0, 0);
+
+glVertex2i(0, 1);
+
+glVertex2i(1, 0);
+
+glVertex2i(1, 1);
+
+glEnd();
+
+Line Loop(Polyline):
+
+glBegin(GL\_LINE\_LOOP);
+
+glVertex2i(0, 0);
+
+glVertex2i(0, 1);
+
+glVertex2i(1, 0);
+
+glVertex2i(1, 1);
+
+glEnd();
+
+)\\
+\textbf{Polygon Issues}
+
+OpenGL will only display polygons correctly that are \textbf{Simple}(edges cannot cross), \textbf{Convex}(All points on line segment between two points in a polygon are also in the polygon) and \textbf{Flat}(all vertices are in the same plane)
+
+User program can check weather above true, OpenGL will produce output but it may not be what is desired.
+
+\textbf{Triangles satisfy all conditions}, that's why we need \textbf{Triangulation algorithms}.\\
+\textbf{Attributes}
+
+\textbf{Point:}
+
+Point size: \textbf{glPointSize(2.0);}
+
+Point color: \textbf{glColor3f(0.0, 0.0, 1.0);}(blue point)
+
+\textbf{Line:}
+
+Line width: \textbf{glLineWidth(2.0);}
+
+Line color: \textbf{glColor3f(0.0, 0.0, 1.0);}(blue line)
+
+\textbf{Face:}
+
+Front and/or back: \textbf{GL\_FRONT, GL\_BACK, GL\_FRONT\_AND\_BACK}
+
+Face color: \textbf{glColor3f(0.0, 0.0, 1.0);}(blue face)
+
+
+\section*{Chapter 4: 2D Modeling Transformation}
+\textbf{Modeling Coordinates, World Coordinate}
+\\
+\textbf{Scale}
+
+Uniform scaling: this scalar is the same for all
+components
+
+Non-uniform scaling: different scalars per component\\
+\textbf{Rotate}
+
+2-D Rotation: 
+
+$x^{'}$ is a linear combination of $x$ and $y$
+
+$y^{'}$ is a linear combination of $x$ and $y$
+
+even though $\sin(\theta)$ and $\cos(\theta)$ are both non-linear.\\
+\textbf{Translate}
+
+Transformations can be combined with simple Algebra.\\
+\textbf{Matrix representation}
+
+\textbf{2D Identity}
+$$
+\begin{bmatrix}
+1 & 0\\
+0 & 1
+\end{bmatrix}
+$$
+
+\textbf{2D Scale around (0, 0)}
+$$
+\begin{bmatrix}
+S_{x} & 0\\
+0 & S_{y}
+\end{bmatrix}
+$$
+
+\textbf{2D Rotate around (0, 0)}
+$$
+\begin{bmatrix}
+\cos(\theta) & -\sin(\theta)\\
+\sin(\theta) & \cos(\theta)
+\end{bmatrix}
+$$
+
+\textbf{2D Shear}
+$$
+\begin{bmatrix}
+1 & sh_{x}\\
+sh_{y} & 1
+\end{bmatrix}
+$$
+
+\textbf{2D Mirror about Y axis}
+$$
+\begin{bmatrix}
+-1 & 0\\
+0 & 1
+\end{bmatrix}
+$$
+
+\textbf{2D Mirror over (0, 0)}
+$$
+\begin{bmatrix}
+-1 & 0\\
+0 & -1
+\end{bmatrix}
+$$
+
+\textbf{2D Translation ? NO!}: Only \textbf{linear} 2D transformations(Scale, Rotation, Shear, Mirror) can be represented with a 2 by 2 matrix
+\\
+\textbf{Properties of linear transformations}
+
+Satisfies: $T(s_{1}P_{1}+s_{2}P_{2}) = s_{1}T(p_{1})+s_{2}T(p_{2}))$
+
+Origin maps to origin
+
+Lines map to lines
+
+Parallel lines remain parallel
+
+Ratios are preserved
+
+Closed under composition\\
+
+\textbf{Homogeneous Coordinates}
+
+$x^{'} = x + t_{x}$
+
+$y^{'} = y + t_{y}$
+
+Q: Since it has no 2D matrix, how can we represent
+translation as a 3x3 matrix?
+
+$$
+\begin{bmatrix}
+	x\\
+	y
+\end{bmatrix}
+\rightarrow^{homogeneous coords}
+\begin{bmatrix}
+	x\\
+	y\\
+	1
+\end{bmatrix}
+$$
+
+$(x, y, w)$ represents a point at location $(\frac{x}{w}, \frac{y}{w})$
+
+A: $$Translation = 
+\begin{bmatrix}
+1 & 0 & t_x\\
+0 & 1 & t_y\\
+0 & 0 & 1
+\end{bmatrix}
+$$
+\\
+\textbf{Matrix Composition}
+
+\textbf{$p^{'}$} $= T \cdot R \cdot S$ \textbf{$p$}
+
+
+\section*{Chapter 5: Rendering 3D Scenes Pipeline}
+\textbf{Input: 3D Geometric Primitives(model/camera parameters)}
+
+\textbf{Modeling Transformation:} Transform into 3D world coordinate system\\
+
+\textbf{Lighting:} Illuminate according to lighting and reflectance\\
+
+\textbf{Viewing Transformation:} Transform into 3D camera coordinate system\\
+
+\textbf{Projection Transformation:} Transform into 2D screen coordinate system\\
+
+\textbf{Clipping:} Clip primitive outside camera's view\\
+
+\textbf{Scan Conversion(Raster Graphics Algorithm):} Draw pixels(includes texturing, hidden surfaces, ...)\\
+\textbf{Output: Image(Frame buffer)}\\
+\textbf{Rendering: Transformations}
+
+Modeling transforms(decide the object)
+
+Viewing transforms(Move the camera)
+
+Projection transforms(Change the type of camera)\\
+\textbf{Transformation Matrix do transformation for us}
+
+\textbf{modeling transforms} are encapsulated in the OpenGL modelview matrix \textbf{GL\_MODELVIEW}
+
+projection is also represented as a matrix\\
+\textbf{Projection Matrix}
+
+To represent orthographic and perspective projection with the \textbf{projection matrix}:
+
+In OpenGL two matrix stack to operate the transformation
+
+\textbf{glMatrixMode(GL\_PROJECTION $|$ GL\_MODELVIEW)}
+
+Use \textbf{glPushMatrix(); glPopMatrix()} to separate a individual transformation, like /begin, /end.
+
+[glPushMatrix(): copy the top matrix and push into the stack]
+
+[glPopMatrix(): pop up the top matrix, recover to the previous one]\\
+\textbf{The rendering pipeline: Move models, Illuminate, Move camera, Clip, Project to display, Rasterize.}
+
+
+\section*{Chapter 5: 3D Scene Representation}
+3D point\\
+3D vector
+
+Magnitude: $||V|| = \sqrt{(dx^2+dy^2+dz^2)}$
+
+has no location\\
+vector space\\ 
+affine space = vector space + position and distance
+
+Coordinate Systems
+
+Point-point subtraction yields a vector\\
+3D Line Segment\\
+3D Ray\\
+3D Line\\
+3D Line-Slope Intercept
+
+
+\section*{Chapter 5: Euclidean Space}
+Euclidean affine space = affine space + dot product
+
+$v_1 \cdot v_2 = x_1x_2 + y_1y_2 + z_1z_2$
+
+$u \cdot v = |u||v|\cos(\theta)$\\
+Cross product
+
+$||v_1 \times v_2|| = 2 * $Area of triangle
+
+Right hand rules
+
+Determinant and Matrix\\
+3D primitives\\
+
+
+\section*{Chapter 6: Triangle Rasterlization}
+\textbf{In interactive graphics, polygons rule the world:}
+
+Lowest common denominator for surfaces
+
+\textbf{(Can represent any surface with arbitrary accuracy)}
+
+(Splines, mathematical functions, volumetric isosurfaces...)
+
+Mathematical simplicity lends itself to simple, regular
+rendering algorithms\\
+\textbf{Triangle is the minimal unit of a polygon}
+
+All polygons can be broken up into
+triangles
+
+Triangles are guaranteed to be \textbf{Planar} and \textbf{Convex}\\
+\textbf{Triangulation}
+
+Convex polygons easily
+triangulated
+
+\textbf{Concave} polygons present
+a challenge\\
+\textbf{Rasterizing Triangles}
+
+Interactive graphics hardware commonly uses
+\textbf{edge walking} or \textbf{edge equation} techniques for
+rasterizing triangles\\
+
+
+\section*{Chapter 6: Edge Equations}
+\textbf{Edge Walking}
+
+Draw edges vertically,namely
+
+Fill in horizontal spans for each
+scanline\\
+
+\begin{algorithm}[h]
+	\caption{Edge Walking}
+	\begin{algorithmic}[1]
+		\item[Input:] vertices T[3]
+		\item[Output:] Rasterized triangle
+		\item[1] \textbf{for} each edge pair of the Triangle \textbf{do}
+		\item[2] initialize $x_L$, $x_R$
+		\item[3] compute $\frac{dx_L}{dy_L}$ and $\frac{dx_R}{dy_R}$
+		\item[4] \textbf{for} scanline at $y$ \textbf{do}
+		\item[5] \textbf{for} (int $x$ = $x_L$; $x <= x_R$; $x$++) \textbf{do}
+		\item[6] set\_pixel($x$, $y$)
+		\item[7] \textbf{end for}
+		\item[8] $x_L += \frac{dx_L}{dy_L}$, $x_R += \frac{dx_R}{dy_R}$, update $y$
+		\item[9] \textbf{end for}
+		\item[10] \textbf{if} $x_L$ or $x_R$ == T[0] or T[1] or T[2] \textbf{do}
+		\item[11] \textbf{continue}
+		\item[12] \textbf{end if}
+		\item[13] \textbf{end for}
+	\end{algorithmic}
+\end{algorithm}
+Advantages: Simple
+
+Disadvantages: 
+
+very serial (one pixel at a time) can’t parallelize
+
+inner loop bottleneck if lots of computation per pixel
+
+Special cases: horizontal edges: computing intersection causes divide by 0
+
+Special cases: Sliver: not even a single pixel wide\\
+\textbf{Edge Equations}
+
+the implicit equation of a line
+$$Ax + By + C = 0$$
+
+Given a point $(x, y)$
+
+On the line: $Ax + By + C = 0$
+
+"Above" the line: $Ax + By + C > 0$
+
+"Below" the line: $Ax + By + C < 0$
+
+Edge equations thus define two \textbf{half-spaces}
+
+And a triangle can be defined as the intersection of three
+positive half-spaces
+
+So...simply turn on those pixels for which all edge
+equations evaluate to > 0
+
+compute min, max bounding box
+
+we can find edge equation from two vertices.
+
+Q: Given three corners P 0 , P 1 , P 2 of a triangle, what are our
+three edges?How do we make sure the half-spaces defined by the
+edge equations all share the same sign on the interior of
+the triangle?
+
+A: \textbf{Be consistent, clockwise} (Ex: $[P_0, P_1], [P_1, P_2], [P_2, P_0]$)
+\begin{algorithm}[h]
+	\caption{Use Edge Equation to rasterize triangle}
+	\begin{algorithmic}[1]
+		\item[1] findBoundingBox(\&$x_{min}$, \&$x_{max}$, \&$y_{min}$, \&$y_{max}$);
+		\item[2] setupEdges(\&$a_0$, \&$b_0$, \&$c_0$, \&$a_1$, \&$b_1$, \&$c_1$, \&$a_2$, \&$b_2$, \&$c_2$);
+		\item[3] \textbf{for} $y$ \textbf{from} $y_{min}$ \textbf{to} $y_max$ \textbf{do}
+		\item[4] \textbf{for} $x$ \textbf{from} $x_{min}$ \textbf{to} $x_max$ \textbf{do}
+		\item[5] \textbf{if} $a_0*x + b_0 * y + c_0 > 0$ \&\& $a_1*x + b_1 * y + c_1 > 0$ \&\& $a_2*x + b_2 * y + c_2 > 0$ \textbf{do}
+		\item[6] setupPixel($x$, $y$)
+		\item[7] \textbf{end if}
+		\item[8] \textbf{end for}
+		\item[9] \textbf{end for}
+	\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[h]
+	\caption{General Polygon Rasterization}
+	\begin{algorithmic}[1]
+		\item[1] \textbf{for} each scanline \textbf{do}
+		\item[2] edgeCnt = 0
+		\item[3] \textbf{for} each pixel on scanline (left to right) \textbf{do}
+		\item[4] \textbf{if} oldpixel $\rightarrow$ newpixel crosses edge \textbf{do}
+		\item[5] edgeCnt++
+		\item[6] \textbf{if} edgeCnt \% 2 \textbf{do}
+		\item[7] setPixel(pixel)
+		\item[8] \textbf{end if}
+		\item[9] \textbf{end if}
+		\item[10] \textbf{end for}
+		\item[11] \textbf{end for}
+	\end{algorithmic}
+\end{algorithm}
+
+
+\section*{Chapter 7: Cohen-Sutherland Line Clipping}
+\textbf{Divide view window into regions defined by window edges}\\
+\textbf{Assign each region a 4-bit outcode}\\
+
+\begin{algorithm}[h]
+	\caption{int computeOutcode(x, y)}
+	\begin{algorithmic}[1]
+		\item[Input:] $Y_{max}$, $Y_{min}$, $X_{max}$, $X_{min}$, $(x, y)$
+		\item[Output:] the 4-bit outcode of point $(x, y)$
+		\item[1] code = 0
+		\item[2] \textbf{if} $y > Y_{max}$ \textbf{do}
+		\item[3] code = 8
+		\item[4] \textbf{else if} $y < Y_{min}$ \textbf{do}
+		\item[5] code = 4
+		\item[6] \textbf{end if}
+		\item[7] \textbf{if} $x > X_{max}$ \textbf{do}
+		\item[8] code = code + 2
+		\item[9] \textbf{else if} $x < X_{min}$ \textbf{do}
+		\item[10] code = code + 1
+		\item[11] \textbf{end if}
+		\item[12] \textbf{return} code
+	\end{algorithmic}
+\end{algorithm}
+Cohen-Sutherland Line Clipping\\
+\begin{algorithm}[h]
+	\caption{Cohen-Sutherland Line Clipping}
+	\begin{algorithmic}[1]
+		\item[1] \textbf{for} each line segment \textbf{do}
+		\item[2] Assign an outcode to \textbf{each endpoint} according to the area
+		\item[3] \textbf{if} bitwise OR == 0 \textbf{do}
+		\item[4] trivial accept
+		\item[5] \textbf{else if} bitwise AND != 0 \textbf{do}
+		\item[6] trivial reject
+		\item[7] \textbf{else}
+		\item[8] split line segment
+		\item[9] \textbf{end if}
+		\item[10] \textbf{end if}
+		\item[11] \textbf{end for}
+	\end{algorithmic}
+\end{algorithm}
+\\
+Use outcodes to quickly eliminate/include lines
+
+\textbf{Is best algorithm} when trivial accepts/rejects are common\\
+Must compute viewing window clipping of the remaining lines
+
+Non-trivial clipping cost
+
+Redundant clipping of some lines\\
+More efficient algorithms exist
+\\
+
+
+\section*{Chapter 7: Cyrus-Beck Algorithm}
+We wish to optimize line/line intersection
+
+Start with parametric equation of line:
+$$P(t) = P_0 + (P_1 - P_0)t$$
+
+And \textbf{a point} and \textbf{normal} for \textbf{each edge}:
+$$P_L, N_L$$
+
+\textbf{Find t such that}
+$$N_L \cdot [P(t) - P_L] = 0$$
+
+$P(t)$ is the intersection point of a line segment and a view window edge
+
+Solve for \textbf{t}:
+$$t = \frac{N_L[P_L - P_0]}{N_L[P_1 - P_0]}$$
+
+Here we store $N_L[P_1 - P_0]$
+
+\begin{algorithm}[h]
+	\caption{Cyrus-Beck Algorithm}
+	\begin{algorithmic}[1]
+		\item[1] Compute t for line intersection with all four edges, store flag = $N_L[P_1 - P_0]$
+		\item[2] Discard all $t < 0$ and $t > 1$
+		\item[3] \textbf{for} each line in scene \textbf{do}
+		\item[4] Compute PE with largest t(flag $<$ 0)
+		\item[5] Compute PL with smallest t(flag $>$ 0)
+		\item[6] Clip to these two points
+	\end{algorithmic}
+\end{algorithm}
+Cyrus-Beck
+
+Computation of t-intersections is cheap
+
+Computation of (x,y) clip points is only done once
+
+Algorithm doesn’t consider trivial accepts/rejects
+
+\textbf{Best when many lines must be clipped}
+
+Liang-Barsky: Optimized Cyrus-Beck
+
+
+\section*{Chapter 8: Basic of Color}
+\textbf{Elements of color: Illumination, Reflectance, Perception}\\
+\textbf{Physics:}
+
+Illumination: Electromagnetic spectra
+
+Reflection: Material properties and Surface geometry and microgeometry (i.e., polished versus
+matte versus brushed)\\
+\textbf{Perception:}
+
+Physiology and neurophysiology
+
+Perceptual psychology\\
+\textbf{Trichromacy:}
+
+RGB\\
+visible electromagnetic spectrum: \textbf{400-700 nm}\\
+Most of the light we see is reflected\\
+\textbf{The Retina:}
+
+Strangely, \textbf{rods} and \textbf{cones} are
+at the \textbf{back} of the retina,
+behind a mostly-transparent
+neural structure that
+collects their response.
+
+The center of the retina is a densely packed region called
+the \textbf{fovea}.
+
+Cones much denser here than the \textbf{periphery}\\
+\textbf{Photopic:}
+
+Light intensities that are bright enough to
+stimulate the cone receptors and bright enough to
+“saturate” the rod receptors(Sunlight and bright indoor lighting are both photopic lighting conditions)\\
+\textbf{Scotopic:}
+
+Light intensities that are bright enough to
+stimulate the rod receptors but too dim to stimulate the
+cone receptors(Moonlight and extremely dim indoor lighting are both scotopic lighting
+conditions)\\
+\textbf{Rods are sensitive to scotopic light levels}
+
+All rods contain the same photopigment molecule: Rhodopsin
+
+All rods have the \textbf{same sensitivity} to various wavelengths of light
+
+Therefore, rods suffer from the problem of univariance and \textbf{cannot sense
+differences in color}
+
+\textbf{Under scotopic conditions, only rods are active, which is why the world seems drained of color}\\
+\\
+\textbf{Cone photoreceptors:} Three varieties:
+
+\textbf{L-cones:} Cones that are preferentially sensitive to \textbf{long} wavelengths
+(\textbf{red cones})
+
+\textbf{M-cones:} Cones that are preferentially sensitive to \textbf{middle}
+wavelengths (\textbf{green cones})
+
+\textbf{S-cones:} Cones that are preferentially sensitive to \textbf{short} wavelengths
+(\textbf{blue cones})\\
+Artists often specify color as tints, shades, and tones of
+saturated (pure) pigments
+
+\textbf{Tint:} Gotten by adding white to a pure pigment,
+decreasing saturation
+
+\textbf{Shade:} Gotten by adding
+black to a pure pigment,
+decreasing lightness
+
+\textbf{Tone:} Gotten by adding
+white and black to a pure
+pigment
+
+\section*{Chapter 8: Color Spaces}
+\textbf{Color space:} \textbf{A three-dimensional space that describes all colors.} There are
+several possible color spaces(\textbf{RGB}, \textbf{HSB}(defined by hue, saturation, and brightness))\\
+\textbf{Taking linear combinations of R, G and B defines the
+RGB color space}
+
+the range of perceptible colors generated by adding
+some part each of R, G and B\\
+\textbf{If R, G and B correspond to a monitor’s phosphors
+	(monitor RGB), then the space is the range of colors
+	displayable on the monitor}
+
+\section*{Chapter 9: Light Source}
+\textbf{Modeling Light Sources }$I_L(x, y, z, q, f, \lambda)$...
+
+describes the intensity of energy, leaving a light source, ...
+
+arriving at location(x,y,z), ...
+
+from direction (q,f), ...
+
+with wavelength $\lambda$\\
+\textbf{OpenGL Light Source Models}
+
+Simple mathematical models: Point, Directional, Spot.
+
+\textbf{Point Light Sources: }A point light source emits light equally in all directions from
+a single point. The direction to the light from a point on a surface thus
+differs for different points. So we need to calculate a
+normalized vector to the light
+source for every point we light:
+$$\bar{d} = \frac{\bar{p} - \bar{l}}{||\bar{p} - \bar{l}||}$$
+
+\textbf{Directional Light Sources: }For a directional light source (e.g., sun) we make simplifying
+assumptions
+
+Direction is constant for all surfaces in the scene
+
+All rays of light from the source are \textbf{parallel}
+
+The direction from a surface to the light source is important in
+lighting the surface
+
+Models point light source at infinity (e.g., sun)[intensity $I_L = I_0$(No attenuation with distance), direction $(dx,dy,dz)$]
+
+\textbf{Spot Light Sources: }Spot lights are point sources whose intensity falls off
+directionally
+
+Requires color, point
+direction, falloff
+parameters
+
+Supported by OpenGL
+
+Other Light Sources: 
+Area light sources define a 2-D emissive surface (usually a
+disc or polygon)
+
+
+\section*{Chapter 9: Ambient Light}
+
+Direct (Local) Illumination
+
+Emission at light sources
+
+Scattering at surfaces\\
+Global illumination
+
+Shadows, Refractions, Inter-object reflections.\\
+Ambient Term
+
+Represents reflection of all indirect illumination\\
+\textbf{Ambient Light}
+
+\textbf{Objects not directly lit are typically still visible}(e.g., the ceiling in this room, undersides of desks)
+
+\textbf{This is the result of indirect illumination from emitters, bouncing off
+intermediate surfaces}
+
+\textbf{Too expensive to calculate (in real time), so we use a hack called an
+	ambient light source}
+
+No spatial or directional characteristics; illuminates all surfaces
+equally
+
+Amount reflected depends on surface properties
+
+\section*{Chapter 9: Surface Reflection}
+\textbf{Surface reflectance:}\\
+\textbf{$R_s(\theta, \phi, \gamma, \pi, \lambda)$}...
+
+describes the amount of incident energy,
+
+arriving from direction $(\theta, \phi)$...
+
+leaving in direction $(\gamma, \pi)$, ...
+
+with wavelength $\lambda$
+
+\textbf{Diffuse reflectance:} An ideal diffuse reflector, at the microscopic level, is a
+rough surface (real-world example: chalk), Because of these microscopic variations, an incoming ray of
+light is equally likely to be reflected in any direction over the
+hemisphere. 
+
+\textbf{What does the reflected intensity depend on? How much light is reflected?}
+
+Depends on angle of incident light
+
+Depends on angle of incident light
+
+\textbf{Lambert’s Law}
+$$dL = dA \cos(\theta)$$\\
+Ideal diffuse surfaces reflect according to Lambert’s cosine
+law: The energy reflected by a small portion of a surface from a light
+source in a given direction is proportional to the cosine of the
+angle between that direction and the surface normal. Note that the reflected intensity is independent of the
+viewing direction, but does depend on the surface
+orientation with regard to the light source\\
+\textbf{Specular reflection}
+
+Shiny surfaces exhibit specular reflection(eg. Polished metal, Glossy car finish)
+
+A light shining on a specular surface causes a\textbf{ bright spot} known as a
+specular highlight
+
+Where these highlights appear is a function of the \textbf{viewer’s position},
+so specular reflectance is \textbf{view dependent}\\
+Specular Reflection follows \textbf{Snell’s Laws}
+$$\theta_{(l)ight} = \theta_{(r)eflect}$$\\
+
+
+\section*{Chapter 9: Phong Lighting Model}
+\textbf{Non-Ideal Specular Reflectance: An Empirical Approximation}
+
+Snell’s law applies to \textbf{perfect mirror-like surfaces}, but aside from
+mirrors, few surfaces exhibit perfect specularity. How can we capture the “softer”
+reflections of surface that are glossy
+rather than mirror-like?
+
+\textbf{Hypothesis: most light reflects according to Snell’s
+	Law} But because of microscopic surface variations, some light
+may be reflected in a direction slightly off the ideal reflected
+ray. As we move from the ideal reflected ray, some light is
+still reflected.\\
+\textbf{Phong lighting model: }The most common lighting model in computer graphics was
+suggested by \textbf{Phong:}
+$$I_{specular} = k_{s}I_{light}(\cos(\phi))^{n_{shiny}}$$
+$k_s$: Material surface reflectance\\
+$I_{light}$: Intensity of the light source\\
+$\theta$: The angle between the ideal
+reflectance direction and viewer\\
+$n_{shiny}$: purely
+empirical constant that
+varies the rate of falloff\\
+\textbf{Though this model has no
+	physical basis, it works
+	(sort of) in practice}\\
+\textbf{The cos term of Phong lighting can be computed
+	using vector arithmetic:}
+$$I_{specular} = k_{s}I_{light}(\cos(\bar{v} \cdot \bar{r}))^{n_{shiny}}$$\\
+$v$ is the unit vector towards the viewer\\
+$r$ is the ideal reflectance direction\\
+
+The Final Combined Equation
+
+Single light source:
+$$I = I_E + K_{A}I_{AL} + K_D(N \cdot L)I_L + K_s(V \cdot R)^n I_L$$
+
+Multiple light sources:
+$$I = I_E + K_{A}I_{AL} + \sum_i (K_D(N \cdot L_i)I_i + K_s(V \cdot R_i)^n I_i)$$
+
+(I = emission + ambient + diffuse + specular)\\
+\textbf{OpenGL Function, Light properties}
+
+void glMaterialfv( GLenum face, GLenum pname, const GLfloat
+* params);
+
+face: Specifies which face or faces are being updated. Must be one of
+GL\_FRONT, GL\_BACK, or GL\_FRONT\_AND\_BACK
+
+pname: Specifies the material parameter of the face or faces that is
+being updated. Must be one of GL\_AMBIENT, GL\_DIFFUSE,
+GL\_SPECULAR, GL\_EMISSION, GL\_SHININESS,
+GL\_AMBIENT\_AND\_DIFFUSE, or GL\_COLOR\_INDEXES.
+
+Params: parameter values.
+
+void glNormalfv(normal[]);
+
+void glLightfv( GLenum light, GLenum pname, GLfloat *params);
+
+light: Number ID of light
+
+pname: GL\_AMBIENT, GL\_DIFFUSE, GL\_SPECULAR, GL\_POSITION
+
+GL\_SPOT\_DIRECTION, GL\_SPOT\_EXPONENT
+
+GL\_SPOT\_CUTOFF
+
+GL\_CONSTANT\_ATTENUATION
+
+GL\_LINEAR\_ATTENUATION
+
+GL\_QUADRATIC\_ATTENUATION
+
+
+\section*{Chapter 10: Global Illumination}
+\textbf{Global illumination}
+
+\textbf{Shadows, Refractions, Inter-object reflections.}\\
+The notion that a point is illuminated by more than
+light from local lights; it is illuminated by all the
+emitters and reflectors in the global scene
+
+\textbf{Ray Tracing}
+
+\textbf{Radiosity}\\
+Local vs. Global Illumination
+
+• Local illumination: Phong model (OpenGL)
+
+– Light to surface to viewer
+
+– No shadows, inter-reflections
+
+– Fast enough for interactive graphics
+
+• Global illumination: Ray tracing
+
+– Multiple specular reflections and transmissions
+
+– Only one step of diffuse reflection
+
+• Global illumination: Radiosity
+
+– All diffuse interreflections; shadows\\
+Image vs. Object Space
+
+• Image space: Ray tracing
+
+– Trace backwards from viewer
+
+– View-dependent calculation
+
+– Result: rasterized image (pixel by pixel)
+
+• Object space: Radiosity
+
+– Assume only diffuse-diffuse interactions
+
+– View-independent calculation
+
+– Result: 3D model, color for each surface patch
+
+– Can render with OpenGL\\
+
+
+\section*{Chapter 10: Algorithm of Ray Tracing}
+\textbf{Idea of ray tracing:} \textbf{Inversely tracing} the process of
+light being reflected and refracted
+multiple time and finally casted to the eye.\\
+\textbf{Ray tree of a ray}\\
+\textbf{Recursion termination:} 
+
+Condition 1: The ray does not intersect with any object,
+or intersects with pure diffusion plane
+
+Condition 2: The contribution of the ray is small enough
+
+Condition 3: The recursive depth reaches maximum
+
+\begin{algorithm}[h]
+	\caption{Algorithm of Ray Tracing}
+	\begin{algorithmic}[1]
+		\item[1] \textbf{for} each pixel $p$ in the image \textbf{do}
+		\item[2] Shoot a ray $R$ from viewpoint to pixel $p$
+		\item[3] Compute all intersections between $R$ and
+		the scene, and find the visible one, $P$
+		\item[4] Compute the color $lc$ of $P$ using Phong
+		model
+		\item[5] Cast rays from the directions of reflection and
+		refraction from $P$(The surface is opaque, stop)
+		\item[6] Recursive compute Ir and It(contribution from
+		the environment)
+		\item[7] $p = lc + lr + lt$
+		\item[8] \textbf{end for}
+	\end{algorithmic}
+\end{algorithm}
+$\space$\\
+\textbf{Pseudo Code}
+
+
+$\space$\\
+\textbf{Recursive Ray Tracing}
+
+Computing all shadow and feeler rays is slow
+
+• Stop after fixed number of 
+iterations
+
+• Stop when energy contributed is below threshold
+
+Most work is spent testing ray/plane intersections
+
+• Use bounding boxes to reduce comparisons
+
+• Use bounding volumes to group objects
+
+• Parallel computation (on shared-memory machines)\\
+\textbf{Summary}
+
+\textbf{Ray casting (direct Illumination)}
+
+• Usually use simple analytic approximations for
+light source emission and surface reflectance
+
+\textbf{Recursive ray tracing (global illumination)}
+
+• Incorporate shadows, mirror reflections,
+and pure refractions\\
+{All of this is an approximation
+	so that it is practical to compute}\\
+\textbf{Radiosity}
+
+• Ray tracing models specular reflection and refractive
+transparency, but still uses an \textbf{ambient term} to account for
+other lighting effects
+
+• Radiosity is the rate at which \textbf{energy is emitted or reflected
+by a surface}
+
+• By conserving light energy in a volume, these radiosity
+effects can be traced
+
+All surfaces are assumed perfectly diffuse
+
+• What does that mean about property of lighting in scene?
+
+– Light is reflected equally in all directions
+
+\textbf{Diffuse-diffuse surface lighting effects possible}\\
+\textbf{Basic Idea}
+
+• We can accurately model diffuse reflections from a surface by
+considering the radiant energy transfers between surfaces,
+subject to conservation of energy laws.
+
+• Divide surfaces into patches (elements)
+
+• Model light transfer between 
+patches as system of linear
+equations\\
+\textbf{Ray Tracing vs. Radiosity}
+
+\textbf{Radiosity captures the sum of light transfer well}
+
+• But it models all surfaces as diffuse reflectors
+
+• Can’t model specular reflections or refraction
+
+– Images are viewpoint independent
+
+\textbf{Ray tracing captures the complex behavior of light rays as they
+reflect and refract}
+
+• Works best with specular surfaces.
+
+– Diffuse surface converts light ray into many. Ray tracing follows
+one ray and does not capture the full effect of the diffusion.
+
+– Must use ambient term to replace absent diffusion\\
+
+
+\section*{Chapter 11: Three Shading Models}
+\textbf{Flat Shading}
+
+The simplest approach, flat shading, \textbf{calculates
+illumination at a single point for each polygon}
+
+If an object really is faceted, is this accurate? Is flat shading realistic for faceted object?
+
+\textbf{No:}
+
+• For point sources, the direction to light varies across the
+facet
+
+– For specular reflectance, direction to eye
+varies across the facet
+
+\textbf{Vertex Normals}
+
+To get smoother-looking surfaces,we introduce vertex
+normals at each vertex
+
+• Usually different from facet normal
+
+• Used \textbf{only} for shading
+
+• Think of as a better approximation of the \textbf{real} surface that the
+polygons approximate
+
+Vertex normals may be
+
+• Provided with the model
+
+• Approximated by
+averaging the normals
+of the facets that
+share the vertex\\
+\textbf{Gouraud Shading}
+
+\textbf{This is the most common approach}
+
+• \textbf{Perform Phong lighting at the vertices}
+
+• Linearly interpolate the resulting colors over faces
+
+– Along edges
+
+– Along scanlines
+
+Does this eliminate the facets?
+
+\textbf{Artifacts}
+
+• Often appears dull, chalky
+
+• Lacks accurate specular component
+
+– If included, will be averaged over entire polygon\\
+\textbf{Phong Shading}
+
+Phong shading is not the same as Phong lighting, though
+they are sometimes mixed up
+
+• \textbf{Phong lighting}: the empirical model we’ve been discussing
+to calculate illumination at a point on a surface
+
+• \textbf{Phong shading}: linearly interpolating the surface normal
+across the facet, \textbf{applying the Phong lighting model at
+every pixel}
+
+– Same input as Gouraud shading
+
+– Usually very smooth-looking results
+
+– But, considerably more calculation
+
+\textbf{Interpolate the vertex normals over the surface}
+
+• Normal of each edge point is linearly
+interpolated by that of two endpoints
+
+• normal of interior points is
+linearly interpolate by the
+normals of the triangle
+vertices\\\\
+\textbf{Shading Models}
+
+\textbf{Flat Shading}
+
+• Compute Phong lighting once for 
+entire polygon
+
+\textbf{Gouraud Shading}
+
+• Compute Phong lighting at the vertices and interpolate
+lighting values across polygon
+
+\textbf{Phong Shading}
+
+• Interpolate normals across polygon and perform Phong
+lighting across polygon\\
+
+
+\section*{Chapter 11: Morphing}
+\textbf{What is morphing?}
+
+• Combination of warping and blending
+
+– warp = image distortion
+
+ Map image to a coke can
+
+ Ripple effect
+
+– blend = cross dissolve
+
+ Film cut effect\\
+\textbf{Ways to morph}
+
+\textbf{3D Techniques}
+
+• Interpolate between corresponding vertices
+
+– Models must align somehow
+
+– Polygon transformations may be difficult
+
+\textbf{2D Techniques}
+
+• Cross-dissolve
+
+–Difficult to align
+
+•Pixelize the images and move the “tiles”
+
+–Tile paths must be determined somehow\\
+\textbf{Beier-Neely Morphing}
+
+\textbf{Transformation with One Pair of Lines}
+
+\textbf{How would start image morph?}
+
+\textbf{Build Common Coordinate System}
+
+\textbf{Find projection}
+
+Find projection on perpendicular
+
+\textbf{Sample color from initial image}
+
+\textbf{Repeat for all pixels in image}
+
+\textbf{Now do the same thing for the final image}
+
+\textbf{Now do a 50/50 blend of two warped
+images}
+
+Blends between Two Images
+
+$\bullet$ We define corresponding lines in I 0 and I 1 .
+
+$\bullet$ Each intermediate frame $I$ of the metamorphosis is
+defined by creating a new set of line segments by
+interpolating the lines from their positions in $I_0$ to the
+positions in $I_1$ .
+
+$\bullet$ Both images $I_0$ and $I_1$ are distorted toward the position
+of the lines in $I$. These two resulting images are
+cross-dissolved throughout the metamorphosis
+
+
+\end{document}          
