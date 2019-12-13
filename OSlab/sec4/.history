@@ -1,0 +1,13 @@
+help
+cd ..
+pwd
+cd sec4
+ls
+la
+help
+cd ..
+pwd
+cd sec4
+ls
+la
+ll
