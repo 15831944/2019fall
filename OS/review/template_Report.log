@@ -1,0 +1,472 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2019.12.10)  16 DEC 2019 06:37
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**template_Report.tex
+(./template_Report.tex
+LaTeX2e <2018-12-01>
+(/usr/share/texlive/texmf-dist/tex/latex/base/report.cls
+Document Class: report 2018/09/03 v1.4i Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2018/09/03 v1.4i Standard LaTeX file (size option)
+)
+\c@part=\count80
+\c@chapter=\count81
+\c@section=\count82
+\c@subsection=\count83
+\c@subsubsection=\count84
+\c@paragraph=\count85
+\c@subparagraph=\count86
+\c@figure=\count87
+\c@table=\count88
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(./template_Report.aux)
+\openout1 = `template_Report.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 10.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 10.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 10.
+ [1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 34.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 34.
+
+Underfull \hbox (badness 10000) in paragraph at lines 27--36
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 27--36
+
+ []
+
+[1]
+Underfull \hbox (badness 10000) in paragraph at lines 39--41
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 48--50
+
+ []
+
+
+Overfull \hbox (18.83286pt too wide) in paragraph at lines 71--72
+[]\OT1/cmr/m/n/10 - OS ef-fec-tively al-lo-cates re-sources to sup-port multi-u
+sers and multi-programming 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 87--89
+
+ []
+
+[1]
+Underfull \hbox (badness 10000) in paragraph at lines 146--148
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 149--151
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 178--181
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 178--181
+
+ []
+
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 216--218
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 245--247
+
+ []
+
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 260--261
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 260--261
+
+ []
+
+
+Overfull \hbox (2.19142pt too wide) in paragraph at lines 267--269
+\OT1/cmr/bx/n/10 pro-gram\OT1/cmr/m/n/10 . A pro-cess is fun-da-men-tally a $[]
+$
+ []
+
+[4]
+Underfull \hbox (badness 10000) in paragraph at lines 301--303
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 320--322
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 333--335
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 338--340
+
+ []
+
+[5]
+Underfull \hbox (badness 10000) in paragraph at lines 385--387
+
+ []
+
+[6]
+Underfull \hbox (badness 10000) in paragraph at lines 434--439
+
+ []
+
+
+Overfull \hbox (30.34251pt too wide) in paragraph at lines 456--457
+[]\OT1/cmr/bx/n/10 - To build com-mu-ni-ca-tion be-tween User Pro-grams(User) a
+nd OS(Kernel) 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 464--466
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 469--471
+
+ []
+
+[7]
+Underfull \hbox (badness 10000) in paragraph at lines 495--498
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 515--517
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 528--530
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 540--544
+
+ []
+
+[8]
+Underfull \hbox (badness 10000) in paragraph at lines 586--588
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 604--606
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 626--628
+
+ []
+
+[9]
+Underfull \hbox (badness 10000) in paragraph at lines 651--653
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 676--678
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 685--687
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 692--696
+
+ []
+
+[10]
+Underfull \hbox (badness 10000) in paragraph at lines 790--795
+
+ []
+
+[11]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 804.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 804.
+
+Underfull \hbox (badness 10000) in paragraph at lines 808--811
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 808--811
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 812--819
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 823--829
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 836--838
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 839--843
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 844--849
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 844--849
+
+ []
+
+[12]
+Underfull \hbox (badness 10000) in paragraph at lines 854--872
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 854--872
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 854--872
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 854--872
+
+ []
+
+
+Overfull \hbox (0.47063pt too wide) in paragraph at lines 895--897
+[]\OT1/cmr/m/n/10 A Semaphore whose COUNT only has two val-ues: 0(un-locked) an
+d 1(locked). 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 895--897
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 903--905
+
+ []
+
+[13] [14]
+Underfull \hbox (badness 10000) in paragraph at lines 1033--1035
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1070--1072
+
+ []
+
+[15]
+Underfull \hbox (badness 10000) in paragraph at lines 1082--1085
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1110--1112
+
+ []
+
+[16]
+Underfull \hbox (badness 10000) in paragraph at lines 1164--1168
+
+ []
+
+[17]
+Underfull \hbox (badness 10000) in paragraph at lines 1247--1248
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1247--1248
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1254--1255
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1256--1259
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1277--1280
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1295--1296
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1301--1302
+
+ []
+
+[18]
+Underfull \hbox (badness 10000) in paragraph at lines 1322--1323
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1346--1347
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1356--1357
+
+ []
+
+[19]
+Underfull \hbox (badness 10000) in paragraph at lines 1384--1386
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1411--1412
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1447--1449
+
+ []
+
+[20]
+Underfull \hbox (badness 10000) in paragraph at lines 1507--1514
+
+ []
+
+[21]
+Underfull \hbox (badness 10000) in paragraph at lines 1559--1562
+
+ []
+
+
+Overfull \hbox (2.13951pt too wide) in paragraph at lines 1566--1573
+[]\OT1/cmr/m/n/10 Problem?: This method is gen-er-ally im-pos-si-ble, be-cause 
+the mutual-exclusion
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1602--1607
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1623--1626
+
+ []
+
+[22]
+Underfull \hbox (badness 10000) in paragraph at lines 1672--1673
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1672--1673
+
+ []
+
+[23] (./template_Report.aux) ) 
+Here is how much of TeX's memory you used:
+ 268 strings out of 494485
+ 3087 string characters out of 6175791
+ 59243 words of memory out of 5000000
+ 4011 multiletter control sequences out of 15000+600000
+ 7588 words of font info for 27 fonts, out of 8000000 for 9000
+ 59 hyphenation exceptions out of 8191
+ 23i,6n,17p,800b,179s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi1
+0.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on template_Report.pdf (25 pages, 173055 bytes).
+PDF statistics:
+ 125 PDF objects out of 1000 (max. 8388607)
+ 87 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+
